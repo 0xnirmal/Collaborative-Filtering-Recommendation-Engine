@@ -1,4 +1,4 @@
-###Collaborative Filtering Recommendation Engine###
+#Collaborative Filtering Recommendation Engine#
 
 This project is a survey of collaborative filtering techniques and their effectiveness in a movie recommendation system. Similarity metrics we are surveying include:
 * Pearson Correlation Coefficient
