@@ -7,7 +7,7 @@ from predictor import Predictor
 
 args = None
 
-def load_data(filename):
+def load_data(filename, exclusion = False):
     users = {}
     with open(filename) as reader:
         #skip first line
@@ -23,8 +23,33 @@ def load_data(filename):
             user = users[user]
             movie_id = int(split_line[1])
             rating = float(split_line[2])
-            user[movie_id] = rating
+            if exclusion:
+                if len(user) < 10:
+                    user[movie_id] = rating
+            else:
+                user[movie_id] = rating
     return users
+
+def load_prediction_data(filename):
+    training_data = load_data(filename, True)
+    prediction_data = {}
+    with open(filename) as reader:
+        #skip first line
+        next(reader)
+        for line in reader:
+            if len(line.strip()) == 0:
+                continue
+            # Divide the line into user, movieid, and rating
+            split_line = line.split(",")
+            user = int(split_line[0])
+            if user not in prediction_data:
+                prediction_data[user] = {}
+            movie_id = int(split_line[1])
+            rating = float(split_line[2])
+            if movie_id not in training_data[user] and len(prediction_data[user]) < 10:
+                prediction_data[user][movie_id] = rating
+    return prediction_data
+
 
 def get_args():
     parser = argparse.ArgumentParser(description="This is the main test harness for your algorithms.")
@@ -55,6 +80,18 @@ def train(users, algorithm):
         print("No model found given algorithm " + algorithm)
         sys.exit(-1)
 
+def write_predictions(predictor, prediction_data, predictions_file):
+    try:
+        with open(predictions_file, 'w') as writer:
+            for user in prediction_data:
+                labels = predictor.predict(user, prediction_data[user])
+                for key in labels:
+                    writer.write(str(labels[key]))
+                    writer.write('\n')
+    except IOError:
+        raise Exception("Exception while opening/writing file for writing predicted labels: " + predictions_file)
+
+
 def main():
     global args
     args = get_args()
@@ -73,7 +110,7 @@ def main():
 
     elif args.mode.lower() == "test":
         # Load the test data.
-        users = load_data(args.data)
+        test_data = load_prediction_data(args.data)
         predictor = None
         # Load the model.
         try:
@@ -83,6 +120,7 @@ def main():
             raise Exception("Exception while reading the model file.")
         except pickle.PickleError:
             raise Exception("Exception while loading pickle.")
+        write_predictions(predictor, test_data, args.predictions_file)
     else:
         raise Exception("Unrecognized mode.")
 

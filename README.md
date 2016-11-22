@@ -21,4 +21,5 @@ For a detailed understanding of the study, see the project proposal attached to 
 ###Training###
 python Code/runner.py --mode train --algorithm insert_algorithm_here --model-file algorithm's_name.model --data Data/ratings.csv
 
-
+##Predicting###
+python Code/runner.py --mode test --algorithm insert_algorithm_here --model-file algorithm's_name.model --data Data/ratings.csv --predictions-file insert_algorithm_here.predictions
