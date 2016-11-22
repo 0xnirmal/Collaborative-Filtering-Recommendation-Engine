@@ -5,3 +5,4 @@
 # Model Files #
 ######################
 *.model
+*.predictions
