@@ -10,7 +10,8 @@ For a detailed understanding of the study, see the project proposal attached to 
 
 ##Things To Do##
 - [x] Establish Data Pipeline
-- [ ] Setup prediction/testing environment
+- [x] Setup prediction/testing environment
+- [ ] Write evaluation script
 - [ ] Write/test Pearson Correlation Coefficient
 - [ ] Write/test Spearman Rank Correlation Coefficient
 - [ ] Write/test Mean-Squared Distance
