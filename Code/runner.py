@@ -21,10 +21,9 @@ def load_data(filename):
             if user not in users:
                 users[user] = {}
             user = users[user]
-            if len(users) <= 10:
-                movie_id = int(split_line[1])
-                rating = float(split_line[2])
-                user[movie_id] = rating
+            movie_id = int(split_line[1])
+            rating = float(split_line[2])
+            user[movie_id] = rating
     return users
 
 def get_args():
