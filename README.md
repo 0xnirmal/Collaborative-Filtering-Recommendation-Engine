@@ -19,6 +19,10 @@ For a detailed understanding of the study, see the project proposal attached to 
 - [ ] Write final analysis
 
 ##Running the Code##
+All of these commands should be issued from the main directory of the repository.
+###Setup###
+pip install -r requirements.txt
+
 ###Training###
 python Code/runner.py --mode train --algorithm insert_algorithm_here --model-file algorithm's_name.model --data Data/ratings.csv
 
