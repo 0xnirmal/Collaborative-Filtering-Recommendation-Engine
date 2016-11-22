@@ -2,6 +2,8 @@ import os
 import argparse
 import sys
 import pickle
+from pearson import Pearson
+from predictor import Predictor
 
 args = None
 
@@ -40,7 +42,9 @@ def get_args():
 
 def train(users, algorithm):
 	if algorithm == 'pearson':
-		return None
+		model = Pearson()
+		model.train(users)
+		return model
 	elif algorithm == 'spearmen':
 		return None
 	elif algorithm == 'mean_squared':
