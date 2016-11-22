@@ -10,8 +10,8 @@ args = None
 def load_data(filename):
     users = {}
     with open(filename) as reader:
-    	#skip first line
-    	next(reader)
+        #skip first line
+        next(reader)
         for line in reader:
             if len(line.strip()) == 0:
                 continue
@@ -19,11 +19,12 @@ def load_data(filename):
             split_line = line.split(",")
             user = int(split_line[0])
             if user not in users:
-            	users[user] = {}
+                users[user] = {}
             user = users[user]
-            movie_id = int(split_line[1])
-            rating = float(split_line[2])
-            user[movie_id] = rating
+            if len(users) <= 10:
+                movie_id = int(split_line[1])
+                rating = float(split_line[2])
+                user[movie_id] = rating
     return users
 
 def get_args():
@@ -41,18 +42,18 @@ def get_args():
     return args
 
 def train(users, algorithm):
-	if algorithm == 'pearson':
-		model = Pearson()
-		model.train(users)
-		return model
-	elif algorithm == 'spearmen':
-		return None
-	elif algorithm == 'mean_squared':
-		return None
-	elif algorithm == "cosine_similarity":
-		return None
-	else:
-		print("No model found given algorithm " + algorithm)
+    if algorithm == 'pearson':
+        model = Pearson()
+        model.train(users)
+        return model
+    elif algorithm == 'spearmen':
+        return None
+    elif algorithm == 'mean_squared':
+        return None
+    elif algorithm == "cosine_similarity":
+        return None
+    else:
+        print("No model found given algorithm " + algorithm)
         sys.exit(-1)
 
 def main():
@@ -60,9 +61,9 @@ def main():
     args = get_args()
     if args.mode.lower() == "train":
         # Load the training data.
-        users = load_data(args.data)
+        training_set = load_data(args.data)
         # Train the model.
-        predictor = train(users, args.algorithm)
+        predictor = train(training_set, args.algorithm)
         try:
             with open(args.model_file, 'wb') as writer:
                 pickle.dump(predictor, writer)
@@ -87,4 +88,4 @@ def main():
         raise Exception("Unrecognized mode.")
 
 if __name__ == "__main__":
-	main()
+    main()
