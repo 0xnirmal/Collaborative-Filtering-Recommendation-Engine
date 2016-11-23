@@ -48,4 +48,4 @@ absolute_difference = 0
 for i in range (len(predicted_labels)):
 	absolute_difference += math.fabs(float(predicted_labels[i]) - float(true_labels[i]))
 
-print 'Accuracy: %f' % ((float(absolute_difference)/float(total)))
+print 'Mean Absolute Error: %f' % ((float(absolute_difference)/float(total)))
