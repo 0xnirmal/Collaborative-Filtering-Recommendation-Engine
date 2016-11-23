@@ -11,7 +11,7 @@ For a detailed understanding of the study, see the project proposal attached to 
 ##Things To Do##
 - [x] Establish Data Pipeline
 - [x] Setup prediction/testing environment
-- [ ] Write evaluation script
+- [x] Write evaluation script
 - [ ] Write/test Pearson Correlation Coefficient
 - [ ] Write/test Spearman Rank Correlation Coefficient
 - [ ] Write/test Mean-Squared Distance
@@ -30,5 +30,5 @@ python Code/runner.py --mode train --algorithm insert_algorithm_here --model-fil
 python Code/runner.py --mode test --algorithm insert_algorithm_here --model-file algorithm's_name.model --data Data/ratings.csv --predictions-file insert_algorithm_here.predictions
 
 ###Testing###
-TBD (Evaluation Script needs to be written)
+python Code/eval.py Data/ratings.csv algorithm's_name.predictions
 
