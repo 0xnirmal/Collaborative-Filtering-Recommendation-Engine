@@ -6,3 +6,7 @@
 ######################
 *.model
 *.predictions
+
+# Directories to ignore #
+#########################
+env/

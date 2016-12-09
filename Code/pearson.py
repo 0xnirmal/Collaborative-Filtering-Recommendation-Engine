@@ -1,6 +1,7 @@
 import sys
 import math
 from predictor import Predictor
+import collections
 
 class Pearson(Predictor):
 	def __init__(self):
@@ -13,6 +14,7 @@ class Pearson(Predictor):
 		#TODO
 		#Make sure you hide the training data on the values in the user_set
 		label_set = {}
-		for i in range(len(user_set)):
-			label_set[i] = 0
-		return label_set
+		od = collections.OrderedDict(sorted(user_set.items()))
+		for key, value in (od.items()):
+			label_set[key] = value
+		return collections.OrderedDict(sorted(label_set.items()))
