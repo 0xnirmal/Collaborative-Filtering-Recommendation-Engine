@@ -32,3 +32,9 @@ python Code/runner.py --mode test --algorithm insert_algorithm_here --model-file
 ###Testing###
 python Code/eval.py Data/ratings.csv algorithm's_name.predictions
 
+###Algorithm Names (for command line arguments)###
+* pearson
+* spearman
+* mean_squared
+* cosine
+
