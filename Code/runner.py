@@ -61,7 +61,7 @@ def get_args():
                         help="The name of the model file to create/load.")
     parser.add_argument("--predictions-file", type=str, help="The predictions file to create.")
     parser.add_argument("--algorithm", type=str, help="The name of the algorithm for training.")
-
+    parser.add_argument("--num-neighbors", type=int, help="The number of similar neighbors considered", default=5)
     args = parser.parse_args()
     return args
 
@@ -84,7 +84,7 @@ def write_predictions(predictor, prediction_data, predictions_file):
     try:
         with open(predictions_file, 'w') as writer:
             for user in prediction_data:
-                labels = predictor.predict(user, prediction_data[user])
+                labels = predictor.predict(user, prediction_data[user], args.num_neighbors)
                 for key in labels:
                     writer.write(str(labels[key]))
                     writer.write('\n')

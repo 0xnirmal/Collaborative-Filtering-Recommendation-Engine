@@ -27,7 +27,7 @@ pip install -r requirements.txt
 python Code/runner.py --mode train --algorithm insert_algorithm_here --model-file algorithm's_name.model --data Data/ratings.csv
 
 ###Predicting###
-python Code/runner.py --mode test --algorithm insert_algorithm_here --model-file algorithm's_name.model --data Data/ratings.csv --predictions-file insert_algorithm_here.predictions
+python Code/runner.py --mode test --algorithm insert_algorithm_here --model-file algorithm's_name.model --num-neighbors default_is_five --data Data/ratings.csv --predictions-file insert_algorithm_here.predictions
 
 ###Testing###
 python Code/eval.py Data/ratings.csv algorithm's_name.predictions
