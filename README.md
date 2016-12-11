@@ -14,8 +14,8 @@ For a detailed understanding of the study, see the project proposal attached to 
 - [x] Write evaluation script
 - [x] Write/test Pearson Correlation Coefficient
 - [x] Write/test Spearman Rank Correlation Coefficient
-- [ ] Write/test Mean-Squared Distance
-- [ ] Write/test Cosine Similarity
+- [x] Write/test Mean-Squared Distance
+- [x] Write/test Cosine Similarity
 - [ ] Write final analysis
 
 ##Running the Code##

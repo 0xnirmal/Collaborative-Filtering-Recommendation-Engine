@@ -5,6 +5,8 @@ import pickle
 from pearson import Pearson
 from spearman import Spearman
 from predictor import Predictor
+from meansquared import Meansquared
+from cosine import Cosine
 
 args = None
 
@@ -76,9 +78,13 @@ def train(users, algorithm):
         model.train(users)
         return model
     elif algorithm == 'mean_squared':
-        return None
-    elif algorithm == "cosine_similarity":
-        return None
+        model = Meansquared()
+        model.train(users)
+        return model
+    elif algorithm == "cosine":
+        model = Cosine()
+        model.train(users)
+        return model
     else:
         print("No model found given algorithm " + algorithm)
         sys.exit(-1)
