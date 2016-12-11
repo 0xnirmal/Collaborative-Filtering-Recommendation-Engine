@@ -1,6 +1,6 @@
 import sys
 import math
-from predictor import Predictor
+from predictor import Predictor, compute_weighted_average, compute_mean, clean_user
 import collections
 import math
 from heapq import heappush, heappop
@@ -15,13 +15,9 @@ class Pearson(Predictor):
 	def predict(self, user_num, user_set, num_neighbors):
 		#Make sure you hide the training data on the values in the user_set
 		print(user_num)
-		ordered_user_set = collections.OrderedDict(sorted(user_set.items()))
 		prediction_set = {}
 		user_pre_clean = self.user_data[user_num]
-		user_post_clean = {}
-		for movie in user_pre_clean:
-			if movie not in user_set:
-				user_post_clean[movie] = user_pre_clean[movie]
+		user_post_clean = clean_user(user_pre_clean)
 		#user_post_clean contains all the values for a user not in our prediction set
 		similarity_to_user = []
 		#generate relevant subset
@@ -32,37 +28,17 @@ class Pearson(Predictor):
 				similarity_to_user.append((similarity, self.user_data[user_v]))
 		similarity_to_user.sort(key=lambda x: x[0], reverse=True)
 		for movie in user_set:
-			prediction = self.compute_weighted_average(user_post_clean, similarity_to_user, movie, num_neighbors)
+			prediction = compute_weighted_average(user_post_clean, similarity_to_user, movie, num_neighbors)
+			if prediction > 5.0:
+				prediction = 5.0
+			elif prediction < 0.5:
+				prediction = 0.5
 			prediction_set[movie] = prediction
-
 		return collections.OrderedDict(sorted(prediction_set.items()))
 
-	def compute_weighted_average(self, u, similarity_to_user, movie, num_neighbors):
-		mean_u = self.compute_mean(u)
-		numerator = 0.0
-		denominator = 0.0
-		neighbors = []
-		for similarity, user in similarity_to_user:
-			if movie in user and len(neighbors) < num_neighbors:
-				neighbors.append((similarity, user))
-			if len(neighbors) >= num_neighbors:
-				break
-		#neighbors is a list of tuples similarity - user
-		for i in range(len(neighbors)):
-			similarity = neighbors[i][0]
-			user = neighbors[i][1]
-			mean_user = self.compute_mean(user)
-			numerator += similarity * user[movie]
-			denominator += math.fabs(similarity)
-
-		if denominator == 0:
-			return 0
-
-		return numerator / denominator
-
 	def calculate_pearson_similarity(self, u, v):
-		mean_u = self.compute_mean(u)
-		mean_v = self.compute_mean(v)
+		mean_u = compute_mean(u)
+		mean_v = compute_mean(v)
 		#generate intersection subset
 		intersection = []
 		for movie in u:
@@ -87,14 +63,4 @@ class Pearson(Predictor):
 		if denominator == 0:
 			return 0.0
 		return numerator / denominator
-
-	def compute_mean(self, u):
-		sum_u = 0.0
-		for movie in u:
-			sum_u += u[movie]
-		return sum_u / len(u)
-
-
-
-
 
