@@ -70,8 +70,10 @@ def train(users, algorithm):
         model = Pearson()
         model.train(users)
         return model
-    elif algorithm == 'spearmen':
-        return None
+    elif algorithm == 'spearman':
+        model = Spearman()
+        model.train(users)
+        return model
     elif algorithm == 'mean_squared':
         return None
     elif algorithm == "cosine_similarity":
