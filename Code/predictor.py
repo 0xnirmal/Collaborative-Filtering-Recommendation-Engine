@@ -30,7 +30,7 @@ def compute_mean(u):
 		sum_u += u[movie]
 	return sum_u / len(u)
 
-def clean_user(user_pre_clean):
+def clean_user(user_pre_clean, user_set):
 	user_post_clean = {}
 	for movie in user_pre_clean:
 		if movie not in user_set:

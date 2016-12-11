@@ -17,7 +17,7 @@ class Spearman(Predictor):
 		print(user_num)
 		prediction_set = {}
 		user_pre_clean = self.user_data[user_num]
-		user_post_clean = clean_user(user_pre_clean)
+		user_post_clean = clean_user(user_pre_clean, user_set)
 		#user_post_clean contains all the values for a user not in our prediction set
 		similarity_to_user = []
 		#generate relevant subset
@@ -37,10 +37,7 @@ class Spearman(Predictor):
 		return collections.OrderedDict(sorted(prediction_set.items()))
 
 	def calculate_spearman_similarity(self, u, v):
-		# mean_u = compute_mean_spearman(u)
-		# mean_v = compute_mean_spearman(v)
 		#generate intersection subset
-
 		intersection = []
 		for movie in u:
 			if movie in v:
@@ -48,12 +45,10 @@ class Spearman(Predictor):
 		if len(intersection) == 0:
 			return 0
 
-
 		movie_ranks_u = {}
 		movie_ranks_v = {}
 
 		index = 0.5
-
 		while index <= 5.0:
 			movie_ranks_u[index] = 0
 			movie_ranks_v[index] = 0
@@ -63,29 +58,57 @@ class Spearman(Predictor):
 			movie_ranks_u[u[movie]] += 1
 			movie_ranks_v[v[movie]] += 1
 
+		list_of_u_ranks = []
+		list_of_v_ranks = []
+		starting_rank_u = 1.0
+		starting_rank_v = 1.0
 
+		index = 5.0
+		while index >= 0.5:
+			in_block = movie_ranks_u[index]
+			if in_block != 0:
+				ending_rank = starting_rank_u + in_block
+				avg_rank = (starting_rank_u + ending_rank) / in_block
+				for i in range(in_block):
+					list_of_u_ranks.append(avg_rank)
+				starting_rank_u += in_block
+			index -= 0.5
 
-		for movie in intersection:
-			numerator += (u[movie] - mean_u) * (v[movie] - mean_v)
+		index = 5.0
+		while index >= 0.5:
+			in_block = movie_ranks_v[index]
+			if in_block != 0:
+				ending_rank = starting_rank_v + in_block
+				avg_rank = (starting_rank_v + ending_rank) / in_block
+				for i in range(in_block):
+					list_of_v_ranks.append(avg_rank)
+				starting_rank_v += in_block
+			index -= 0.5
 
+		mean_u = compute_mean_spearman(list_of_u_ranks)
+		mean_v = compute_mean_spearman(list_of_v_ranks)
 
-		#calulate denominator
+		numerator = 0.0
 		denominator = 0.0
-		radical1 = 0.0
-		radical2 = 0.0
-		for movie in intersection:
-			radical1 += math.pow(u[movie] - mean_u, 2)
-			radical2 += math.pow(v[movie] - mean_v, 2)
-		radical1 = math.sqrt(radical1)
-		radical2 = math.sqrt(radical2)
-		denominator = radical1 * radical2
+		#compute numerator
+		for i in range(len(intersection)):
+			numerator += (list_of_u_ranks[i] - mean_u) * (list_of_v_ranks[i] - mean_v)
+
+		#computer denominator
+		term1 = 0.0
+		term2 = 0.0
+		for i in range(len(intersection)):
+			term1 += math.pow(list_of_u_ranks[i] - mean_u, 2)
+			term2 += math.pow(list_of_v_ranks[i] - mean_v, 2)
+		denominator = math.sqrt(term1 * term2)
+
 		if denominator == 0:
 			return 0.0
 		return numerator / denominator
 
-	def compute_mean_spearman(u):
-		sum_u = 0.0
-		for movie in u:
-			sum_u += u[movie]
-		return sum_u / len(u)
+def compute_mean_spearman(list_of_u_ranks):
+	sum_u = 0.0
+	for rank in list_of_u_ranks:
+		sum_u += rank
+	return sum_u / len(list_of_u_ranks)
 

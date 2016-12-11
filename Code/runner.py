@@ -3,6 +3,7 @@ import argparse
 import sys
 import pickle
 from pearson import Pearson
+from spearman import Spearman
 from predictor import Predictor
 
 args = None

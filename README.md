@@ -13,7 +13,7 @@ For a detailed understanding of the study, see the project proposal attached to 
 - [x] Setup prediction/testing environment
 - [x] Write evaluation script
 - [x] Write/test Pearson Correlation Coefficient
-- [ ] Write/test Spearman Rank Correlation Coefficient
+- [x] Write/test Spearman Rank Correlation Coefficient
 - [ ] Write/test Mean-Squared Distance
 - [ ] Write/test Cosine Similarity
 - [ ] Write final analysis

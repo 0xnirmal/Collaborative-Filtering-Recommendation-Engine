@@ -17,7 +17,7 @@ class Pearson(Predictor):
 		print(user_num)
 		prediction_set = {}
 		user_pre_clean = self.user_data[user_num]
-		user_post_clean = clean_user(user_pre_clean)
+		user_post_clean = clean_user(user_pre_clean, user_set)
 		#user_post_clean contains all the values for a user not in our prediction set
 		similarity_to_user = []
 		#generate relevant subset
