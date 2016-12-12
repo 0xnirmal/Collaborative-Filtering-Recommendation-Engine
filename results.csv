@@ -1,3 +1,4 @@
+algorithm,number of neighbors, mean absolute error, time
 pearson,10,0.859421,26.65645599
 pearson,20,0.912033,27.85574603
 pearson,30,0.982148,34.90167189
