@@ -14,7 +14,6 @@ class Pearson(Predictor):
 
 	def predict(self, user_num, user_set, num_neighbors):
 		#Make sure you hide the training data on the values in the user_set
-		print(user_num)
 		prediction_set = {}
 		user_pre_clean = self.user_data[user_num]
 		user_post_clean = clean_user(user_pre_clean, user_set)
