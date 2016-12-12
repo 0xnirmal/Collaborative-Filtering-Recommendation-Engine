@@ -16,7 +16,7 @@ For a detailed understanding of the study, see the project proposal attached to 
 - [x] Write/test Spearman Rank Correlation Coefficient
 - [x] Write/test Mean-Squared Distance
 - [x] Write/test Cosine Similarity
-- [ ] Write final analysis
+- [x] Write final analysis
 
 ##Running the Code##
 All of these commands should be issued from the main directory of the repository.
@@ -29,8 +29,11 @@ python Code/runner.py --mode train --algorithm insert_algorithm_here --model-fil
 ###Predicting###
 python Code/runner.py --mode test --algorithm insert_algorithm_here --model-file algorithm's_name.model --num-neighbors default_is_five --data Data/ratings.csv --predictions-file insert_algorithm_here.predictions
 
-###Testing###
+###Evaluation###
 python Code/eval.py Data/ratings.csv algorithm's_name.predictions
+
+###Running Testing Suite###
+python test.py
 
 ###Algorithm Names (for command line arguments)###
 * pearson
