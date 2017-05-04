@@ -1,4 +1,4 @@
-#Collaborative Filtering Recommendation Engine#
+# Collaborative Filtering Recommendation Engine #
 
 This project is a survey of neighborhood-based collaborative filtering techniques and their effectiveness in a movie recommendation system. Similarity metrics we are surveying include:
 * Pearson Correlation Coefficient
@@ -8,7 +8,7 @@ This project is a survey of neighborhood-based collaborative filtering technique
 
 For a detailed understanding of the study, see the writeup attached to this repo.
 
-##Things To Do##
+## Things To Do ##
 - [x] Establish Data Pipeline
 - [x] Setup prediction/testing environment
 - [x] Write evaluation script
@@ -18,24 +18,24 @@ For a detailed understanding of the study, see the writeup attached to this repo
 - [x] Write/test Cosine Similarity
 - [x] Write final analysis
 
-##Running the Code##
+## Running the Code ##
 All of these commands should be issued from the main directory of the repository.
-###Setup###
+### Setup ###
 pip install -r requirements.txt
 
-###Training###
+### Training ###
 python Code/runner.py --mode train --algorithm insert_algorithm_here --model-file algorithm's_name.model --data Data/ratings.csv
 
-###Predicting###
+### Predicting ###
 python Code/runner.py --mode test --algorithm insert_algorithm_here --model-file algorithm's_name.model --num-neighbors default_is_five --data Data/ratings.csv --predictions-file insert_algorithm_here.predictions
 
-###Evaluation###
+### Evaluation ###
 python Code/eval.py Data/ratings.csv algorithm's_name.predictions
 
-###Running Testing Suite###
+### Running Testing Suite ###
 python test.py
 
-###Algorithm Names (for command line arguments)###
+### Algorithm Names (for command line arguments) ###
 * pearson
 * spearman
 * mean_squared
