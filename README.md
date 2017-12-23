@@ -23,7 +23,7 @@ python Code/runner.py --mode train --algorithm insert_algorithm_here --model-fil
 ```
 
 ### Predicting ###
-````
+```
 python Code/runner.py --mode test --algorithm insert_algorithm_here --model-file algorithm's_name.model --num-neighbors default_is_five --data Data/ratings.csv --predictions-file insert_algorithm_here.predictions
 ```
 
