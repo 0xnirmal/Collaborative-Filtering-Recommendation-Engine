@@ -6,10 +6,6 @@ This project is a survey of neighborhood-based collaborative filtering technique
 * Mean-Squared Distance
 * Cosine Similarity
 
-For a detailed understanding of the study, see the writeup attached to this repo.
-
-
-
 ## Running Instructions ##
 All of these commands should be issued from the main directory of the repository.
 ### Setup ###
@@ -43,6 +39,12 @@ python test.py
 * mean_squared
 * cosine
 
+## Figures and Preliminary Results ##
+![figure1]
+![figure2]
+
+For a detailed understanding of the study, see the writeup attached to this repo.
+
 ## Things To Do ##
 - [x] Establish Data Pipeline
 - [x] Setup prediction/testing environment
@@ -53,3 +55,5 @@ python test.py
 - [x] Write/test Cosine Similarity
 - [x] Write final analysis
 
+[figure1]: https://github.com/nkrishn9/Collaborative-Filtering-Recommendation-Engine/blob/master/Results/graph1.png
+[figure2]: https://github.com/nkrishn9/Collaborative-Filtering-Recommendation-Engine/blob/master/Results/graph2.png
